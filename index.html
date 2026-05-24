@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>timetable-generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsonata@2.0.5/jsonata.min.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-900">
+    <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
+      <header>
+        <h1 class="text-3xl font-bold">timetable-generator</h1>
+        <p class="text-slate-600">Excel-driven recurring weekly academic timetable scheduler.</p>
+      </header>
+
+      <section class="card">
+        <h2 class="section-title">1) Upload workbook</h2>
+        <div class="flex flex-col md:flex-row md:items-center gap-3">
+          <input id="workbookInput" type="file" accept=".xlsx,.xls" class="block w-full text-sm" />
+          <button id="loadSampleBtn" class="btn-secondary">Load bundled sample</button>
+        </div>
+        <p id="fileStatus" class="text-sm text-slate-600 mt-2">No workbook loaded.</p>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">2) Validation summary</h2>
+        <div id="validationSummary" class="text-sm text-slate-700">Upload a workbook to validate.</div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">3) Generate timetable</h2>
+        <button id="generateBtn" class="btn-primary" disabled>Generate timetable</button>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">4) Timetable grid view</h2>
+        <div class="mb-3 flex items-center gap-3">
+          <label for="batchSelect" class="text-sm">Batch</label>
+          <select id="batchSelect" class="border rounded p-2 text-sm" disabled></select>
+          <button id="exportBtn" class="btn-secondary" disabled>Export to Excel</button>
+        </div>
+        <div id="gridContainer" class="overflow-auto"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">5) Scheduling failures</h2>
+        <ul id="failuresList" class="list-disc list-inside text-sm text-amber-700"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+name: Bootstrap timetable-generator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create project structure
+        run: |
+          mkdir -p sample-data
+
+          touch index.html
+          touch styles.css
+          touch main.js
+          touch excel.js
+          touch scheduler.js
+          touch rules.js
+          touch grid.js
+          touch validation.js
+          touch export.js
+
+          cat > README.md << 'EOF'
+          # timetable-generator
+
+          Browser-only academic timetable generator.
+
+          ## Stack
+          - HTML
+          - Vanilla JS
+          - TailwindCSS
+          - SheetJS
+          - JSONata
+
+          ## Features
+          - Excel-driven scheduling
+          - Weekly recurring timetable generation
+          - Constraint-aware heuristic scheduler
+          - Batch/teacher/room conflict detection
+          - Excel export
+
+          ## Structure
+
+          \`\`\`
+          /
+          ├── index.html
+          ├── styles.css
+          ├── main.js
+          ├── excel.js
+          ├── scheduler.js
+          ├── rules.js
+          ├── grid.js
+          ├── validation.js
+          ├── export.js
+          └── sample-data/
+          \`\`\`
+          EOF
+
+          cat > .gitignore << 'EOF'
+          .DS_Store
+          node_modules
+          EOF
+
+      - name: Commit bootstrap structure
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add .
+
+          git diff --cached --quiet || git commit -m "Bootstrap timetable-generator structure"
+
+          git push
